@@ -21,18 +21,15 @@ const LAYERS_DATA = {
     }
 };
 
-// Функция отображения информации при клике
 function showInfo(layerId) {
     const info = LAYERS_DATA[layerId];
     const titleEl = document.getElementById('infoTitle');
     const contentEl = document.getElementById('infoContent');
     const badgesEl = document.getElementById('protocolBadges');
 
-    // Обновляем текст
     titleEl.textContent = info.title;
     contentEl.innerHTML = info.text;
 
-    // Обновляем значки протоколов
     badgesEl.innerHTML = '';
     info.protocols.forEach(proto => {
         const badge = document.createElement('span');
@@ -42,12 +39,10 @@ function showInfo(layerId) {
     });
 }
 
-// Анимация пакета (Инкапсуляция)
 function animatePacket() {
     const packet = document.getElementById('dataPacket');
     const sendBtn = document.getElementById('sendBtn');
     
-    // Блокируем кнопку на время анимации
     sendBtn.disabled = true;
     packet.classList.remove('hidden');
     
@@ -57,43 +52,37 @@ function animatePacket() {
     packet.style.backgroundColor = "#fff";
     packet.style.color = "#333";
 
-    // Тайминги анимации
-    // Шаг 1: Прикладной уровень
     setTimeout(() => {
         packet.innerHTML = "DATA";
     }, 0);
 
-    // Шаг 2: Транспортный уровень (Спуск вниз)
     setTimeout(() => {
-        packet.style.top = '160px'; // Сдвиг к следующему блоку
+        packet.style.top = '160px'; 
         packet.innerHTML = "<small>[TCP]</small> DATA";
         packet.style.backgroundColor = "#e0f7fa";
     }, 1000);
 
-    // Шаг 3: Интернет уровень
     setTimeout(() => {
         packet.style.top = '260px';
         packet.innerHTML = "<small>[IP]</small> <small>[TCP]</small> DATA";
         packet.style.backgroundColor = "#fff3e0";
     }, 2000);
 
-    // Шаг 4: Уровень доступа
     setTimeout(() => {
         packet.style.top = '360px';
         packet.innerHTML = "<small>[MAC]</small> <small>[IP]</small> ...";
         packet.style.backgroundColor = "#eceff1";
     }, 3000);
 
-    // Конец: Уход в "кабель"
     setTimeout(() => {
         packet.style.top = '450px';
         packet.innerHTML = "101101001..."; // Биты
     }, 4000);
 
-    // Сброс
     setTimeout(() => {
         packet.classList.add('hidden');
         sendBtn.disabled = false;
         packet.style.top = '60px';
     }, 5000);
+
 }
