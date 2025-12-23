@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная модель стека TCP/IP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Визуализатор стека TCP/IP</h1>
+        <p>Нажмите на уровень для информации или отправьте пакет для симуляции.</p>
+    </header>
+
+    <main class="container">
+        
+        <section class="stack-section">
+            <div class="controls">
+                <button id="sendBtn" onclick="animatePacket()">🚀 Отправить данные (Симуляция)</button>
+            </div>
+
+            <div class="stack-container">
+                <div id="dataPacket" class="packet hidden">DATA</div>
+
+                <div class="layer layer-app" onclick="showInfo('app')">
+                    <span class="layer-name">4. Прикладной уровень (Application)</span>
+                    <span class="layer-sub">HTTP, DNS, FTP</span>
+                </div>
+
+                <div class="layer layer-transport" onclick="showInfo('transport')">
+                    <span class="layer-name">3. Транспортный уровень (Transport)</span>
+                    <span class="layer-sub">TCP, UDP</span>
+                </div>
+
+                <div class="layer layer-internet" onclick="showInfo('internet')">
+                    <span class="layer-name">2. Межсетевой уровень (Internet)</span>
+                    <span class="layer-sub">IP, ICMP</span>
+                </div>
+
+                <div class="layer layer-access" onclick="showInfo('access')">
+                    <span class="layer-name">1. Уровень доступа (Network Access)</span>
+                    <span class="layer-sub">Ethernet, Wi-Fi</span>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="info-section">
+            <div class="info-card">
+                <h2 id="infoTitle">Выберите уровень</h2>
+                <div id="infoContent">
+                    <p>Нажмите на любой уровень стека слева, чтобы узнать подробности о его работе, протоколах и структуре заголовков.</p>
+                    <p>Нажмите кнопку <strong>"Отправить данные"</strong>, чтобы увидеть процесс инкапсуляции.</p>
+                </div>
+                <div class="protocol-badge-container" id="protocolBadges">
+                    </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
